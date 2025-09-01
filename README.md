@@ -6,3 +6,4 @@
 - 86495 - Lypnik, Zoi - lypnik.zoi@gmail.com - ZoiLyp
 - 90317 - Blencio, Juan Mateo -
 - 82603 - Maldonado,  Francisco Daniel - 
+- 91140 - Salum, Mauricio Gabriel - maurisalum@gmail.com - maurisalum
