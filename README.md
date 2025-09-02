@@ -9,3 +9,4 @@
 - 90023 - Carreras, Nicolás - nicolascarreras023@gmail.com - NicolasCarreras23
 - 86199 - Ladux, Carlos Agustin - caladux88@gmail.com - caladux
 - 91140 - Salum, Mauricio - maurisalum@gmail.com - maurisalum
+- 90230 - Ocampo Vysin, Arian Javier - arianjav10@gmail.com - Arianvysn
