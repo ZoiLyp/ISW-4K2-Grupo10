@@ -1,0 +1,13 @@
+# Entorno Virtual
+.venv/
+venv/
+*.pyc
+
+# Caché y Temporales
+__pycache__/
+.pytest_cache/
+.coverage
+
+# Archivos de Sistema/IDE (Opcional, pero recomendado)
+.vscode/
+*~

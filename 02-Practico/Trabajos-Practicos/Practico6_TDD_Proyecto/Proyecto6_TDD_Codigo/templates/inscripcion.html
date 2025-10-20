@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🌿 EcoHarmony Park - Inscripciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest-dark: #1a3409;
+            --forest-green: #2d5016;
+            --leaf-green: #4a7c59;
+            --moss-green: #6b8e23;
+            --emerald: #50c878;
+            --sage: #9caf88;
+            --mint: #98fb98;
+            --earth-light: #f4f1e8;
+            --sand-beige: #f5deb3;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --success: #27ae60;
+            --info: #3498db;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --shadow: rgba(45, 80, 22, 0.15);
+            --shadow-hover: rgba(45, 80, 22, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, 
+                #e8f8f5 0%, 
+                #d1f2eb 25%, 
+                #a3e4db 50%, 
+                #76d7c4 75%, 
+                #5dade2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 219, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 246, 143, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        /* Glassmorphism container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 
+                0 8px 32px var(--shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 40px var(--shadow-hover),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Header styling */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--forest-dark), var(--leaf-green), var(--emerald));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--forest-green);
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--emerald), var(--moss-green));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(80, 200, 120, 0.3);
+            margin-top: 16px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Section styling */
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest-green);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Form styling */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--forest-green);
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(45, 80, 22, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--emerald);
+            background: white;
+            box-shadow: 
+                0 0 0 4px rgba(80, 200, 120, 0.1),
+                0 8px 25px rgba(80, 200, 120, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-input::placeholder {
+            color: rgba(45, 80, 22, 0.5);
+            font-style: italic;
+        }
+
+        /* Cupos display */
+        .cupos-display {
+            background: linear-gradient(135deg, var(--emerald), var(--sage));
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(80, 200, 120, 0.3);
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-group:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--emerald);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .custom-checkbox input {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .custom-checkbox input:checked + .checkmark {
+            background: var(--emerald);
+        }
+
+        .custom-checkbox input:checked + .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        /* Visitor cards */
+        .visitor-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .visitor-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.15);
+        }
+
+        .visitor-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 0.8fr 0.8fr auto;
+            gap: 16px;
+            align-items: end;
+        }
+
+        .remove-btn {
+            background: linear-gradient(135deg, var(--danger), #c0392b);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .remove-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .remove-btn:disabled {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--emerald), var(--moss-green));
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(80, 200, 120, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(80, 200, 120, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--sand-beige), var(--sage));
+            color: var(--forest-green);
+            box-shadow: 0 4px 15px rgba(156, 175, 136, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(156, 175, 136, 0.4);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Messages */
+        .message {
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            border-left: 4px solid;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.ok {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.1));
+            color: var(--success);
+            border-left-color: var(--success);
+        }
+
+        .message.err {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.1));
+            color: var(--danger);
+            border-left-color: var(--danger);
+        }
+
+        /* Action buttons area */
+        .actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 24px;
+                margin: 20px;
+                border-radius: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .visitor-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .actions {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Hide sections with smooth transition */
+        .section.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            max-height: 0;
+            padding: 0 32px;
+            margin: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 2000px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Disable option styling */
+        select option:disabled {
+            color: #999 !important;
+            background-color: #f5f5f5 !important;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <!-- Header -->
+            <div class="header">
+                <h1>🌿 Aventuras EcoHarmony</h1>
+                <p>Conecta con la naturaleza y vive experiencias únicas</p>
+                <div class="badge">
+                    🏞️ EcoParque Sustentable
+                </div>
+            </div>
+
+            <!-- Message area -->
+            <div id="mensaje" aria-live="polite"></div>
+
+            <!-- Main form -->
+            <form id="formInscripcion" onsubmit="return submitForm(event)">
+                <!-- Selection Section -->
+                <div class="section" id="selection-section">
+                    <h2>🎯 Selecciona tu Aventura</h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="actividad">🚀 Actividad</label>
+                            <select id="actividad" name="actividad" class="form-select" required>
+                                <option value="">-- Elige tu aventura --</option>
+                                {% for act in actividades %}
+                                    <option value="{{ act['nombre'] }}" data-requiere-talle="{{ act['requiere_talle']|lower }}">
+                                        {{ act['nombre'] }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="dia">📅 Fecha de tu aventura</label>
+                            <input id="dia" type="date" name="dia" class="form-input" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="horario">⏰ Horario perfecto</label>
+                            <select id="horario" name="horario" class="form-select" required>
+                                <option value="">-- Selecciona el horario --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="cupos">👥 Cupos disponibles</label>
+                            <div id="cupos" class="cupos-display">Selecciona una actividad</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="cantidad_personas">🔢 Aventureros</label>
+                            <input id="cantidad_personas" type="number" min="1" value="1" class="form-input" required 
+                                   placeholder="¿Cuántos aventureros?" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">📋 Términos y condiciones</label>
+                            <div class="checkbox-group" onclick="toggleCheckbox()">
+                                <div class="custom-checkbox">
+                                    <input id="acepta_terminos" type="checkbox" />
+                                    <div class="checkmark"></div>
+                                </div>
+                                <span>Acepto las normas del EcoParque *</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visitors Section -->
+                <div class="section visible" id="visitors-section">
+                    <h2>👨‍👩‍👧‍👦 Información de Aventureros</h2>
+                    <p style="color: var(--forest-green); opacity: 0.7; margin-bottom: 24px;">
+                        🌱 Necesitamos la información de cada aventurero para preparar la mejor experiencia.
+                    </p>
+                    
+                    <div id="visitantes"></div>
+                    
+                    <div style="margin-top: 20px;">
+                        <button type="button" class="btn btn-secondary" onclick="addVisitor()" id="addVisitorBtn">
+                            ➕ Agregar otro aventurero
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions">
+                    <button type="submit" class="btn" id="submitBtn">
+                        🌟 ¡Comenzar la Aventura!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Utilities
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dia').setAttribute('min', today);
+
+        const actividadEl = document.getElementById('actividad');
+        const diaEl = document.getElementById('dia');
+        const horarioEl = document.getElementById('horario');
+        const cuposEl = document.getElementById('cupos');
+        const visitantesEl = document.getElementById('visitantes');
+        const cantidadEl = document.getElementById('cantidad_personas');
+        const mensajeEl = document.getElementById('mensaje');
+
+        // Variable para controlar si acabamos de hacer una inscripción exitosa
+        let justSuccessfullyEnrolled = false;
+
+        // Toggle checkbox function
+        function toggleCheckbox() {
+            const checkbox = document.getElementById('acepta_terminos');
+            checkbox.checked = !checkbox.checked;
+        }
+
+        // Add visitor function with modern styling
+        function addVisitor(data) {
+            const idx = visitantesEl.children.length;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'visitor-card';
+            wrapper.dataset.index = idx;
+
+            // Check if current activity requires talle
+            const selectedOption = actividadEl.selectedOptions[0];
+            const requiereTalle = selectedOption && (selectedOption.dataset.requiereTalle === 'true' || selectedOption.dataset.requiereTalle === 'True' || selectedOption.dataset.requiereTalle === '1');
+
+            wrapper.innerHTML = `
+                <div class="visitor-grid" style="grid-template-columns: ${requiereTalle ? '2fr 1fr 0.8fr 0.8fr auto' : '2fr 1fr 0.8fr auto'};">
+                    <input name="nombre_${idx}" placeholder="👤 Nombre completo del aventurero" class="form-input" required />
+                    <input name="dni_${idx}" placeholder="🆔 DNI (8 dígitos)" class="form-input" required 
+                           pattern="[1-9][0-9]{7}" title="DNI debe tener 8 dígitos y no empezar con 0" />
+                    <input name="edad_${idx}" placeholder="🎂 Edad" type="number" min="0" class="form-input" required />
+                    ${requiereTalle ? `<select name="talle_${idx}" class="form-select" required>
+                        <option value="">👕 Talle</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>` : ''}
+                    <button type="button" class="remove-btn" title="Quitar aventurero" onclick="removeVisitor(this)">✕</button>
+                </div>
+            `;
+
+            if (data) {
+                const inputs = wrapper.querySelectorAll('input, select');
+                inputs[0].value = data.nombre || '';
+                inputs[1].value = data.dni || '';
+                inputs[2].value = data.edad || '';
+                if (requiereTalle && inputs[3]) {
+                    inputs[3].value = data.talle || '';
+                }
+            }
+
+            visitantesEl.appendChild(wrapper);
+            cantidadEl.value = visitantesEl.children.length;
+            syncVisitorsToQuantity();
+        }
+
+        function removeVisitor(btn) {
+            const wrapper = btn.closest('.visitor-card');
+            const idx = Array.from(visitantesEl.children).indexOf(wrapper);
+            if (idx === 0) return; // Don't allow removing first visitor
+
+            wrapper.style.opacity = '0';
+            wrapper.style.transform = 'translateX(-100%)';
+            
+            setTimeout(() => {
+                wrapper.remove();
+                // Reindex inputs
+                Array.from(visitantesEl.children).forEach((child, i) => {
+                    child.dataset.index = i;
+                    const inputs = child.querySelectorAll('input, select');
+                    inputs[0].name = `nombre_${i}`;
+                    inputs[1].name = `dni_${i}`;
+                    inputs[2].name = `edad_${i}`;
+                    inputs[3].name = `talle_${i}`;
+                });
+                cantidadEl.value = Math.max(1, visitantesEl.children.length);
+                syncVisitorsToQuantity();
+            }, 300);
+        }
+
+        function syncVisitorsToQuantity() {
+            let desired = parseInt(cantidadEl.value) || 1;
+            const cuposText = cuposEl.textContent.trim();
+            const cuposNum = parseInt(cuposText) || Infinity;
+            
+            if (!isFinite(cuposNum)) {
+                // no cap
+            } else {
+                if (desired > cuposNum) desired = cuposNum;
+                cantidadEl.value = desired;
+            }
+
+            while (visitantesEl.children.length < desired) addVisitor();
+            while (visitantesEl.children.length > desired) {
+                if (visitantesEl.children.length - 1 === 0) break;
+                visitantesEl.removeChild(visitantesEl.lastElementChild);
+            }
+
+            // Hide remove button for first visitor
+            Array.from(visitantesEl.children).forEach((child, i) => {
+                const btn = child.querySelector('.remove-btn');
+                if (!btn) return;
+                btn.disabled = (i === 0);
+                btn.style.visibility = i === 0 ? 'hidden' : 'visible';
+            });
+
+            toggleAddVisitorButton();
+            updateTalleRequirement();
+        }
+
+        function toggleAddVisitorButton() {
+            const addBtn = document.getElementById('addVisitorBtn');
+            if (!addBtn) return;
+
+            const cuposText = cuposEl.textContent.trim();
+            const cuposNum = parseInt(cuposText) || 0;
+            const currentVisitors = visitantesEl.children.length;
+            
+            const shouldShow = cuposNum > 0 && currentVisitors < cuposNum && !cuposText.includes('Selecciona');
+            
+            if (shouldShow) {
+                addBtn.style.display = 'inline-block';
+                addBtn.disabled = false;
+            } else {
+                addBtn.style.display = 'none';
+                addBtn.disabled = true;
+            }
+        }
+
+        // Start with one visitor
+        addVisitor();
+        toggleAddVisitorButton();
+
+        // Sync when cantidad_personas changes
+        cantidadEl.addEventListener('input', () => {
+            if (cantidadEl.value === '' || parseInt(cantidadEl.value) < 1) cantidadEl.value = 1;
+            syncVisitorsToQuantity();
+        });
+
+        // Fetch horarios
+        async function fetchHorarios() {
+            horarioEl.innerHTML = '<option>🔄 Cargando horarios...</option>';
+            const act = actividadEl.value;
+            const dia = diaEl.value.replace(/-/g, '');
+            
+            if (!act || !dia) {
+                horarioEl.innerHTML = '<option value="">-- Primero selecciona actividad y día --</option>';
+                cuposEl.textContent = 'Selecciona una actividad';
+                toggleAddVisitorButton();
+                return;
+            }
+            
+            try {
+                const resp = await fetch(`/api/horarios?actividad=${encodeURIComponent(act)}&dia=${encodeURIComponent(dia)}`);
+                const data = await resp.json();
+                horarioEl.innerHTML = '<option value="">-- Selecciona el horario --</option>';
+                
+                if (data.horarios) {
+                    const horarios = data.horarios;
+                    Object.keys(horarios).forEach(h => {
+                        const opt = document.createElement('option');
+                        opt.value = h;
+                        const cupos = horarios[h];
+                        opt.textContent = `${h} (${cupos} cupos)`;
+                        
+                        if (cupos === 0) {
+                            opt.disabled = true;
+                            opt.style.color = '#999';
+                            opt.style.backgroundColor = '#f5f5f5';
+                            opt.style.fontStyle = 'italic';
+                            opt.textContent = `${h} (sin cupos)`;
+                        }
+                        
+                        horarioEl.appendChild(opt);
+                    });
+                }
+            } catch (err) {
+                horarioEl.innerHTML = '<option value="">Error al cargar horarios</option>';
+            }
+        }
+
+        async function fetchCupos() {
+            const act = actividadEl.value;
+            const dia = diaEl.value.replace(/-/g, '');
+            const horario = horarioEl.value;
+            
+            if (!act || !dia || !horario) {
+                cuposEl.textContent = 'Selecciona actividad, día y horario';
+                toggleVisitantesSection(true);
+                return;
+            }
+            
+            try {
+                const resp = await fetch(`/api/cupos?actividad=${encodeURIComponent(act)}&dia=${encodeURIComponent(dia)}&horario=${encodeURIComponent(horario)}`);
+                const data = await resp.json();
+                
+                if (data.cupos !== undefined) {
+                    cuposEl.textContent = `${data.cupos} cupos disponibles`;
+                    const tieneCupos = data.cupos > 0;
+                    
+                    // Si acabamos de hacer una inscripción exitosa, suprimir mensaje de "no hay cupos"
+                    if (justSuccessfullyEnrolled && !tieneCupos) {
+                        toggleVisitantesSection(tieneCupos, true); // Suprimir mensaje
+                        justSuccessfullyEnrolled = false; // Reset la bandera
+                    } else {
+                        toggleVisitantesSection(tieneCupos);
+                    }
+                    
+                    if (!tieneCupos) {
+                        const currentOption = horarioEl.querySelector(`option[value="${horario}"]`);
+                        if (currentOption) {
+                            currentOption.disabled = true;
+                            currentOption.style.color = '#999';
+                            currentOption.textContent = horario + ' (sin cupos)';
+                        }
+                    }
+                } else {
+                    cuposEl.textContent = data.error || 'Error';
+                    toggleVisitantesSection(false);
+                }
+                
+                syncVisitorsToQuantity();
+                toggleAddVisitorButton();
+            } catch (err) {
+                cuposEl.textContent = 'Error al verificar cupos';
+                toggleVisitantesSection(false);
+            }
+        }
+
+        function toggleVisitantesSection(show, suppressNoQuotasMessage = false) {
+            const visitantesSection = document.getElementById('visitors-section');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (show) {
+                visitantesSection.classList.remove('hidden');
+                visitantesSection.classList.add('visible');
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+                
+                const currentMsg = mensajeEl.innerHTML;
+                if (currentMsg.includes('No hay cupos')) {
+                    mensajeEl.innerHTML = '';
+                }
+            } else {
+                visitantesSection.classList.add('hidden');
+                visitantesSection.classList.remove('visible');
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.cursor = 'not-allowed';
+                
+                // Solo mostrar mensaje de "no hay cupos" si no se suprime y no hay un mensaje de éxito visible
+                if (!suppressNoQuotasMessage && cuposEl.textContent.includes('0') && !mensajeEl.innerHTML.includes('exitosa')) {
+                    showMessage('🚫 ¡Ups! No hay cupos disponibles para este horario. Prueba con otro horario para tu aventura.', true);
+                }
+            }
+        }
+
+        function updateTalleRequirement() {
+            const selectedOption = actividadEl.selectedOptions[0];
+            if (!selectedOption) return;
+            const requiere = selectedOption.dataset.requiereTalle === 'true' || selectedOption.dataset.requiereTalle === 'True' || selectedOption.dataset.requiereTalle === '1';
+            Array.from(visitantesEl.querySelectorAll('select')).forEach(s => s.required = requiere);
+        }
+
+        // Event listeners
+        actividadEl.addEventListener('change', () => {
+            // Guardar datos de visitantes actuales
+            const visitantesData = Array.from(visitantesEl.children).map(child => {
+                const inputs = child.querySelectorAll('input, select');
+                return {
+                    nombre: inputs[0].value || '',
+                    dni: inputs[1].value || '',
+                    edad: inputs[2].value || '',
+                    talle: inputs[3] ? inputs[3].value || '' : ''
+                };
+            });
+
+            // Limpiar y regenerar visitantes con nueva estructura
+            visitantesEl.innerHTML = '';
+            visitantesData.forEach(data => addVisitor(data));
+            
+            // Si no hay visitantes, agregar uno por defecto
+            if (visitantesEl.children.length === 0) {
+                addVisitor();
+            }
+
+            updateTalleRequirement();
+            fetchHorarios();
+        });
+
+        diaEl.addEventListener('change', fetchHorarios);
+        horarioEl.addEventListener('change', fetchCupos);
+
+        // Submit form
+        async function submitForm(e) {
+            e.preventDefault();
+            mensajeEl.innerHTML = '';
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading"></span> Procesando tu aventura...';
+            submitBtn.disabled = true;
+            
+            const act = actividadEl.value;
+            const dia = diaEl.value.replace(/-/g, '');
+            const horario = horarioEl.value;
+            const acepta = document.getElementById('acepta_terminos').checked;
+
+            if (!act || !dia || !horario) {
+                showMessage('🔍 Por favor selecciona la actividad, día y horario para tu aventura', true);
+                resetSubmitButton();
+                return;
+            }
+            
+            if (!acepta) {
+                showMessage('📋 Para continuar con tu aventura, debes aceptar las normas del EcoParque', true);
+                resetSubmitButton();
+                return false;
+            }
+
+            const visitantes = Array.from(visitantesEl.children).map((child, i) => {
+                const inputs = child.querySelectorAll('input, select');
+                const selectedOption = actividadEl.selectedOptions[0];
+                const requiereTalle = selectedOption && (selectedOption.dataset.requiereTalle === 'true' || selectedOption.dataset.requiereTalle === 'True' || selectedOption.dataset.requiereTalle === '1');
+                
+                return { 
+                    nombre: inputs[0].value, 
+                    dni: inputs[1].value, 
+                    edad: inputs[2].value, 
+                    talle: requiereTalle && inputs[3] ? inputs[3].value : '' 
+                };
+            });
+
+            if (visitantes.length === 0) {
+                showMessage('👥 Debe haber al menos un aventurero', true);
+                resetSubmitButton();
+                return;
+            }
+
+            // Validaciones
+            for (let i = 0; i < visitantes.length; i++) {
+                const v = visitantes[i];
+                if (!v.nombre.trim()) {
+                    showMessage(`👤 Completa el nombre del aventurero ${i + 1}`, true);
+                    resetSubmitButton();
+                    return;
+                }
+                if (!v.edad || parseInt(v.edad) < 0) {
+                    showMessage(`🎂 Completa la edad del aventurero ${i + 1}`, true);
+                    resetSubmitButton();
+                    return;
+                }
+                if (!/^[1-9][0-9]{7}$/.test(v.dni)) {
+                    showMessage(`🆔 El DNI del aventurero ${i + 1} debe tener 8 dígitos y no empezar con 0`, true);
+                    resetSubmitButton();
+                    return;
+                }
+            }
+
+            // Validar talle si la actividad lo requiere
+            const selectedOption = actividadEl.selectedOptions[0];
+            if (selectedOption) {
+                const requiere = selectedOption.dataset.requiereTalle === 'true' || selectedOption.dataset.requiereTalle === 'True' || selectedOption.dataset.requiereTalle === '1';
+                if (requiere) {
+                    for (let i = 0; i < visitantes.length; i++) {
+                        if (!visitantes[i].talle) {
+                            showMessage(`👕 Selecciona el talle para el aventurero ${i + 1} (requerido para esta actividad)`, true);
+                            resetSubmitButton();
+                            return;
+                        }
+                    }
+                }
+            }
+
+            const payload = { actividad: act, dia: dia, horario: horario, visitantes: visitantes, acepta_terminos: acepta };
+            
+            try {
+                const resp = await fetch('/api/inscribir', { 
+                    method: 'POST', 
+                    headers: {'Content-Type':'application/json'}, 
+                    body: JSON.stringify(payload) 
+                });
+                const data = await resp.json();
+                
+                if (resp.ok && data.status === 'ok') {
+                    console.log('Inscripción exitosa, mostrando mensaje...');
+                    justSuccessfullyEnrolled = true; // Activar bandera
+                    const numVisitantes = visitantes.length;
+                    const mensajeExito = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2em; margin-bottom: 12px;">🎉 ¡Inscripción exitosa!</div>
+                            <div style="margin-bottom: 8px;">📝 ${numVisitantes} aventurero${numVisitantes > 1 ? 's' : ''} inscrito${numVisitantes > 1 ? 's' : ''} para <strong>${act}</strong></div>
+                            <div style="margin-bottom: 8px;">📅 Fecha: <strong>${dia.replace(/(\d{4})(\d{2})(\d{2})/, '$3/$2/$1')}</strong></div>
+                            <div style="margin-bottom: 8px;">⏰ Horario: <strong>${horario}</strong></div>
+                            <div style="margin-top: 12px; font-size: 1.1em;">🌿 ¡Nos vemos en EcoHarmony Park!</div>
+                        </div>
+                    `;
+                    console.log('Mensaje de éxito:', mensajeExito);
+                    showMessage(mensajeExito, false);
+                    
+                    // Update data
+                    await fetchCupos();
+                    await fetchHorarios();
+                    
+                    // Reset form después de 4 segundos para que el usuario vea el mensaje
+                    setTimeout(() => {
+                        document.getElementById('formInscripcion').reset();
+                        visitantesEl.innerHTML = '';
+                        addVisitor();
+                        cantidadEl.value = 1;
+                        horarioEl.innerHTML = '<option value="">-- Selecciona el horario --</option>';
+                        cuposEl.textContent = 'Selecciona una actividad';
+                        toggleVisitantesSection(true);
+                        toggleAddVisitorButton();
+                        
+                        // Limpiar el mensaje después del reset
+                        setTimeout(() => {
+                            mensajeEl.innerHTML = '';
+                        }, 1000);
+                    }, 4000);
+                } else {
+                    showMessage(data.message || data.error || 'Error en la inscripción', true);
+                }
+            } catch (err) {
+                showMessage('🌐 Error de conexión: ' + err.message, true);
+            }
+            
+            resetSubmitButton();
+            return false;
+            
+            function resetSubmitButton() {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showMessage(msg, isError) {
+            console.log('showMessage llamada:', msg, isError);
+            console.log('mensajeEl:', mensajeEl);
+            mensajeEl.innerHTML = `<div class="message ${isError ? 'err' : 'ok'}">${msg}</div>`;
+            mensajeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Hacer que el mensaje sea más visible
+            if (!isError) {
+                // Para mensajes de éxito, agregar un efecto visual
+                const messageEl = mensajeEl.querySelector('.message');
+                if (messageEl) {
+                    messageEl.style.animation = 'slideIn 0.5s ease-out, pulse 2s ease-in-out 0.5s';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
