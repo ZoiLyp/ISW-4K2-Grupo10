@@ -678,11 +678,15 @@
             const idx = Array.from(visitantesEl.children).indexOf(wrapper);
             if (idx === 0) return; // Don't allow removing first visitor
 
+            console.log('Eliminando visitante. Cantidad antes:', visitantesEl.children.length);
+
             wrapper.style.opacity = '0';
             wrapper.style.transform = 'translateX(-100%)';
             
             setTimeout(() => {
                 wrapper.remove();
+                console.log('Visitante eliminado. Cantidad después:', visitantesEl.children.length);
+                
                 // Reindex inputs
                 Array.from(visitantesEl.children).forEach((child, i) => {
                     child.dataset.index = i;
@@ -690,9 +694,16 @@
                     inputs[0].name = `nombre_${i}`;
                     inputs[1].name = `dni_${i}`;
                     inputs[2].name = `edad_${i}`;
-                    inputs[3].name = `talle_${i}`;
+                    // Solo reindexar talle si existe
+                    if (inputs[3]) {
+                        inputs[3].name = `talle_${i}`;
+                    }
                 });
-                cantidadEl.value = Math.max(1, visitantesEl.children.length);
+                
+                // Actualizar cantidad de personas
+                const newQuantity = Math.max(1, visitantesEl.children.length);
+                console.log('Actualizando cantidad a:', newQuantity);
+                cantidadEl.value = newQuantity;
                 syncVisitorsToQuantity();
             }, 300);
         }

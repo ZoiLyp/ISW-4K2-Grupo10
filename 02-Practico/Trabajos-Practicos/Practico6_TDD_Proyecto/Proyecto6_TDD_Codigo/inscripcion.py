@@ -1,4 +1,3 @@
-
 class Inscripcion:
     def __init__(self, visitante, nombre_actividad, dia, horario, acepta_terminos):
         self.visitante = visitante

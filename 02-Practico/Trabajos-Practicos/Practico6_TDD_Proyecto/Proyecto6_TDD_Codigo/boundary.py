@@ -4,11 +4,6 @@ import datetime
 
 
 class Boundary:
-    """Boundary que actúa como capa entre la UI y GestorActividades.
-
-    Expone datos en estructuras serializables y convierte datos de la UI
-    a objetos de dominio antes de delegar en GestorActividades.
-    """
     def __init__(self, gestor: GestorActividades):
         self.gestor = gestor
 

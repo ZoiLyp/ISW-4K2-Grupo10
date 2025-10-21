@@ -2,20 +2,7 @@ from inscripcion import Inscripcion
 from actividad import Actividad
 from visitante import Visitante
 from inscripcion import Inscripcion
-"""
-def inscribirse_a_actividad(visitante, nombre_actividad, horario, cantidad_personas, acepta_terminos, actividades):
-    actividad = next((act for act in actividades if act.nombre == nombre_actividad), None)                  # Buscamos la actividad por su nombre de la lista de actividades
-    if not actividad:
-        return "No se encontró la actividad solicitada"
 
-    inscripcion = Inscripcion(visitante, actividad, horario, cantidad_personas, acepta_terminos)            # Creamos una instancia de Inscripcion
-
-    error = inscripcion.validar()                                                      # Validamos la inscripción, si no hay errores confirmamos la misma
-    if error:
-        return error
-
-    return inscripcion.confirmar()
-"""
 
 class GestorActividades:
     def __init__(self):

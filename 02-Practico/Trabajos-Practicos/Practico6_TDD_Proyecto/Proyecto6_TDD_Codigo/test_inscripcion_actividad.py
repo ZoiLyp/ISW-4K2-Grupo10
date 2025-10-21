@@ -1,6 +1,5 @@
 import pytest
 from gestor_actividades import GestorActividades
-from visitante import Visitante
 
 
 @pytest.fixture
@@ -19,12 +18,9 @@ def test_inscripcion_exitosa_con_talle_con_cupo_ok(gestor):
     
     # Llamadas a funciones
     cupos_disponibles_previos = gestor.obtener_cupos_disponibles("Tirolesa", "20251109", "10:00")
-    # actividad_inscripcion_hecha = gestor.inscribir(visitantes, "Tirolesa", "20251109", "10:00", acepta_terminos_condiciones = True)
     inscripciones = gestor.inscribir(visitantes, "Tirolesa", "20251109", "10:00", acepta_terminos_condiciones = True)
     
     # Resultados
-    # assert actividad_inscripcion_hecha != None, "La inscripción falló al crearse"
-    # assert actividad_inscripcion_hecha.nombre == "Tirolesa", "El nombre de la actividad es incorrecto"
     assert cupos_disponibles_previos > 0, "No hay cupos disponibles"
     assert cupos_disponibles_previos > len(visitantes), "No hay cupos suficientes para la cantidad de visitantes"
     assert inscripciones != None, "La inscripcion es None"
@@ -72,7 +68,7 @@ def test_falla_por_sin_cupo(gestor):
 
     # Resultados
     assert cupos_disponibles == 0, "El fixture no está configurado para 0 cupos"
-    assert "No hay cupos suficientes para la cantidad de visitantes" in str(excinfo.value)
+    assert "No hay cupos suficientes para la cantidad de visitantes" in str(excinfo.value), "No se generó la excepción esperada"
     
     print("Test de falla por sin cupo pasó correctamente.")
 
@@ -85,8 +81,8 @@ def test_falla_por_no_aceptar_terminos(gestor):
     with pytest.raises(ValueError) as excinfo:
         gestor.inscribir(visitantes, "Jardinería", "20251109", "11:00", acepta_terminos_condiciones=False)
     
-    # Resiltados
-    assert "Debe aceptar los términos y condiciones para inscribirse" in str(excinfo.value)
+    # Resultados
+    assert "Debe aceptar los términos y condiciones para inscribirse" in str(excinfo.value), "No se generó la excepción esperada"
     
     print("Test de falla por sin cupo pasó correctamente.")
 
@@ -100,7 +96,7 @@ def test_falla_por_horario_invalido(gestor):
         gestor.inscribir(visitantes, "Palestra", "20251109", "20:00", acepta_terminos_condiciones=True)
     
     # Resultados
-    assert "El día o el horario no son válidos para esta actividad" in str(excinfo.value)
+    assert "El día o el horario no son válidos para esta actividad" in str(excinfo.value), "No se generó la excepción esperada"
     
     print("Test de falla por horario invalido pasó correctamente.")
 
@@ -114,7 +110,7 @@ def test_falla_por_falta_de_talle_en_actividad_que_lo_requiere(gestor):
         gestor.inscribir(visitantes, "Palestra", "20251110", "15:00", acepta_terminos_condiciones=True)
     
     # Resultados
-    assert "Esta actividad requiere que se indique la talla de ropa para todos los visitantes" in str(excinfo.value)
+    assert "Esta actividad requiere que se indique la talla de ropa para todos los visitantes" in str(excinfo.value), "No se generó la excepción esperada"
     
     print("Test de falla por falta de talle en actividad que lo requiere pasó correctamente.")
     
