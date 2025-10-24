@@ -21,7 +21,6 @@ class Actividad:
                 for dia, horarios in cupos_por_horario.items()
             }
 
-
     # Verificamos que haya cupo disponible en el horario del dia elegido para la cantidad solicitada
     def tiene_cupo(self, dia, horario, cantidad):
         if dia not in self.cupos_por_horario:

@@ -77,11 +77,15 @@ def test_falla_por_no_aceptar_terminos(gestor):
     # Precondiciones + parametros(gestor)
     visitantes = [("Pedro", "52345678", 22)]
     
+    cupos_antes = gestor.obtener_cupos_disponibles("Jardinería", "20251109", "11:00")
+    
     # Llamada a funciones
     with pytest.raises(ValueError) as excinfo:
         gestor.inscribir(visitantes, "Jardinería", "20251109", "11:00", acepta_terminos_condiciones=False)
     
     # Resultados
+    cupos_despues = gestor.obtener_cupos_disponibles("Jardinería", "20251109", "11:00")
+    assert cupos_antes == cupos_despues, "El sistema modificó cupos a pesar de fallo"
     assert "Debe aceptar los términos y condiciones para inscribirse" in str(excinfo.value), "No se generó la excepción esperada"
     
     print("Test de falla por sin cupo pasó correctamente.")
@@ -104,13 +108,30 @@ def test_falla_por_horario_invalido(gestor):
 def test_falla_por_falta_de_talle_en_actividad_que_lo_requiere(gestor):
     # Precondiciones + parametros(gestor)
     visitantes = [("Lucía", "62345678", 27)]
-    
+    cupos_antes = gestor.obtener_cupos_disponibles("Palestra", "20251110", "15:00")
     # Llamada a funciones
     with pytest.raises(ValueError) as excinfo:    
         gestor.inscribir(visitantes, "Palestra", "20251110", "15:00", acepta_terminos_condiciones=True)
     
     # Resultados
+    cupos_despues = gestor.obtener_cupos_disponibles("Palestra", "20251110", "15:00")
+    assert cupos_antes == cupos_despues, "El sistema modificó cupos a pesar de fallo"
     assert "Esta actividad requiere que se indique la talla de ropa para todos los visitantes" in str(excinfo.value), "No se generó la excepción esperada"
     
     print("Test de falla por falta de talle en actividad que lo requiere pasó correctamente.")
+
+
+def test_falla_por_edad_de_visitante_es_numero_negativo(gestor):
+    # Precondiciones + parametros(gestor)
+    visitantes = [("Lucía", "62345678", -27)]
+    cupos_antes = gestor.obtener_cupos_disponibles("Palestra", "20251110", "15:00")
+    # Llamada a funciones
+    with pytest.raises(ValueError) as excinfo:    
+        gestor.inscribir(visitantes, "Palestra", "20251110", "15:00", acepta_terminos_condiciones=True)
     
+    # Resultados
+    cupos_despues = gestor.obtener_cupos_disponibles("Palestra", "20251110", "15:00")
+    assert cupos_antes == cupos_despues, "El sistema modificó cupos a pesar de fallo"
+    assert "La edad del visitante debe ser un número entero válido" in str(excinfo.value), "No se generó la excepción esperada"
+    
+    print("Test de falla al ingresar edad negativa para un visitante.")

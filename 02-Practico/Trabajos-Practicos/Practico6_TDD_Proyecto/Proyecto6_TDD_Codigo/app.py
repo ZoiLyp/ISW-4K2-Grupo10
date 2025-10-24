@@ -2,22 +2,40 @@ from flask import Flask, render_template, request, jsonify
 from gestor_actividades import GestorActividades
 from visitante import Visitante 
 from boundary import Boundary
+import os
+try:
+    from persistence import Persistencia
+except Exception:
+    Persistencia = None
 
 app = Flask(__name__)
 
 # --- Lógica de Inicialización de Datos (Usando GestorActividades) ---
 def cargar_gestor():
     """Inicializa y configura el GestorActividades con los datos del fixture."""
-    gestor = GestorActividades()
-    # Usamos la nueva estructura: cupos_por_horarios_por_dia
-    gestor.agregar_actividad("Tirolesa", cupos_por_horarios_por_dia={"20251109":{"10:00": 2, "14:00": 1}, "20251110":{"10:00":5, "14:00":7}}, requiere_talle=True)
-    gestor.agregar_actividad("Safari", cupos_por_horarios_por_dia={"20251109":{"09:00": 3}}, requiere_talle=False)
-    gestor.agregar_actividad("Palestra", cupos_por_horarios_por_dia={"20251109":{"15:00": 0}, "20251110":{"15:00": 3}}, requiere_talle=True)
-    gestor.agregar_actividad("Jardinería", cupos_por_horarios_por_dia={"20251109":{"11:00": 2}}, requiere_talle=False)
-    return gestor
+    return GestorActividades()
 
 gestor_actividades = cargar_gestor()
+
+# Configurar persistencia opcional: crea ./data/inscripciones.db
+db_path = os.path.join(os.path.dirname(__file__), 'data', 'inscripciones.db')
+print(f"🔧 Configurando persistencia en: {db_path}")
+if Persistencia is not None:
+    try:
+        persist = Persistencia(db_path)
+        gestor_actividades.set_persistencia(persist)
+        print("✅ Persistencia configurada correctamente")
+    except Exception as e:
+        print(f"❌ Error configurando persistencia: {e}")
+        # si falla la persistencia, continuamos sin ella
+        pass
+else:
+    print("❌ Módulo Persistencia no disponible")
+
+
+# Crea la capa boundary
 boundary = Boundary(gestor_actividades)
+
 # --- Fin de Lógica de Inicialización de Datos ---
 
 
@@ -72,12 +90,19 @@ def api_inscribir():
     horario = payload.get('horario')
     visitantes = payload.get('visitantes', [])
     acepta = payload.get('acepta_terminos', False)
+    
+    print(f"📝 Inscripción recibida: {len(visitantes)} visitantes para {nombre_actividad} el {dia} a las {horario}")
+    print(f"🔍 Persistencia activa: {hasattr(gestor_actividades, 'persistencia') and gestor_actividades.persistencia is not None}")
+    
     try:
         inscripciones = boundary.inscribir(visitantes, nombre_actividad, dia, horario, acepta)
+        print(f"✅ Inscripción exitosa: {len(inscripciones)} inscripciones creadas")
         return jsonify({'status': 'ok', 'inscripciones': len(inscripciones), 'actividad': nombre_actividad})
     except ValueError as e:
+        print(f"❌ Error de validación: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 400
     except Exception as e:
+        print(f"❌ Error inesperado: {e}")
         return jsonify({'status': 'error', 'message': f'Error inesperado: {e}'}), 500
 
 
@@ -104,14 +129,19 @@ def inscribir():
     resultado_mensaje = ""
     
     try:
-        # 3. Llamar a tu lógica de negocio
-        gestor_actividades.inscribir(
-            visitantes, 
-            nombre_actividad, 
-            dia, 
-            horario, 
-            acepta_terminos_condiciones=acepta_terminos
-        )
+        # 3. Convertir visitantes al formato esperado por boundary
+        visitantes_data = []
+        for v in visitantes:
+            visitante_dict = {
+                'nombre': v.nombre,
+                'dni': v.dni,
+                'edad': v.edad,
+                'talle': getattr(v, 'talle', None)
+            }
+            visitantes_data.append(visitante_dict)
+        
+        # Llamar a boundary en lugar de gestor directamente
+        boundary.inscribir(visitantes_data, nombre_actividad, dia, horario, acepta_terminos)
         resultado_mensaje = "Inscripción exitosa."
         
     except ValueError as e:
@@ -120,9 +150,9 @@ def inscribir():
         resultado_mensaje = f"Error inesperado al procesar la inscripción: {e}"
 
     # 4. Redirigir o mostrar el resultado, asegurando que se pasen los días únicos de nuevo
-    dias_disponibles = obtener_dias_unicos(gestor_actividades.actividades)
+    dias_disponibles = boundary.obtener_dias_unicos()
     return render_template('inscripcion.html', 
-                           actividades=gestor_actividades.actividades, 
+                           actividades=boundary.get_actividades(), 
                            dias_unicos=dias_disponibles, 
                            mensaje=resultado_mensaje)
 
